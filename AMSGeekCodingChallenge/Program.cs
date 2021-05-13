@@ -42,32 +42,78 @@ namespace AMSGeekCodingChallenge
                 timesToShuffle--;
             }
         }
+        public static Card dealOneCard(Deck deck)
+        {
+            if (deck.deck.Count() > 0)
+            {
+                var cardToReturn = deck.deck[0];
+                Console.WriteLine($"Card dealt: {cardToReturn.face} of {cardToReturn.suit}");
+                deck.deck.RemoveAt(0);
+                return cardToReturn;
+            }
+            else
+            {
+                return null;
+            }
+            
+            
+        }
+        public static Deck dealOneCard(Deck deck, int cardsToDeal)
+        {
+            if (cardsToDeal <= deck.deck.Count())
+            {
+                while (cardsToDeal >= deck.deck.Count())
+                {
+                    dealOneCard(deck);
+                    cardsToDeal--;
+                    
+                }
+                return deck;
+            }
+            else
+            {
+                return null;
+            }
+            
+
+        }
         
         
         
         static void Main(string[] args)
         {
             var deck = createDeck();
+            var dealt = new DealtCard();
             shuffle(deck, 3);
-
-
-
-
-
-
-
-
-
-
-            foreach (Card card in deck.deck)
+            
+            
+            try
             {
-                Console.WriteLine($"{card.face} of {card.suit}");
+                dealt.dealtCard.Add(dealOneCard(deck));
             }
-            Console.ReadLine();
+            catch (ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("There are no more cards to be dealt from that deck!");
+            }
+
+
+
+
+
+
+
+
+
+            //foreach (Card card in deck.deck)
+            //{
+            //    Console.WriteLine($"{card.face} of {card.suit}");
+            //}
+            //Console.ReadLine();
 
             //TEST FOR UNORGANIZED LIST OF CARDS
 
-
+            //ADD TESTS FOR EACH METHOD
+            //ADD TEST FOR FINAL RUN THROUGH
 
         }
     }
