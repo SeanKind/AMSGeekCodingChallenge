@@ -64,7 +64,7 @@ namespace AMSGeekCodingChallenge
             {
                 var tempDeck = new Deck();
                 Console.WriteLine("Cards dealt: ");
-                while (cardsToDeal >= deck.deck.Count())
+                while (cardsToDeal > 0)
                 {
                     tempDeck.deck.Add(deck.deck[0]);
                     Console.WriteLine($"{deck.deck[0].face} of {deck.deck[0].suit}");
@@ -80,14 +80,17 @@ namespace AMSGeekCodingChallenge
             
 
         }
-        public static Deck deckToDealtDeck(Deck deck, Deck dealtdeck)
+        public static List<Card> deckToDealtDeck(Deck deck, List<Card> dealtDeck)
         {
-            foreach (var card in deck.deck)
+            if (deck != null) 
             {
-                dealtdeck.deck.Add(card);
-                deck.deck.Remove(card);
+                foreach (var card in deck.deck)
+                {
+                    dealtDeck.Add(card);
+                    deck.deck.Remove(card);
+                } 
             }
-            return dealtdeck;
+            return dealtDeck;
         }
         
         
@@ -95,11 +98,12 @@ namespace AMSGeekCodingChallenge
         static void Main(string[] args)
         {
             var deck = createDeck();
-            var dealt = new DealtCardDeck();
+            var dealtDeck = new DealtCardDeck();
             shuffle(deck);
-            dealt.dealtCard.Add(dealOneCard(deck));
-            
-            
+            dealtDeck.dealtCard.Add(dealOneCard(deck));
+
+            deckToDealtDeck(dealOneCard(deck, 10), dealtDeck.dealtCard);
+            Console.ReadLine();
             
             
             
