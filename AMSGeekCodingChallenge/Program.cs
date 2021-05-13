@@ -62,13 +62,16 @@ namespace AMSGeekCodingChallenge
         {
             if (cardsToDeal <= deck.deck.Count())
             {
+                var tempDeck = new Deck();
+                Console.WriteLine("Cards dealt: ");
                 while (cardsToDeal >= deck.deck.Count())
                 {
-                    dealOneCard(deck);
+                    tempDeck.deck.Add(deck.deck[0]);
+                    Console.WriteLine($"{deck.deck[0].face} of {deck.deck[0].suit}");
+                    deck.deck.RemoveAt(0);
                     cardsToDeal--;
-                    
                 }
-                return deck;
+                return tempDeck;
             }
             else
             {
@@ -77,33 +80,40 @@ namespace AMSGeekCodingChallenge
             
 
         }
+        public static Deck deckToDealtDeck(Deck deck, Deck dealtdeck)
+        {
+            foreach (var card in deck.deck)
+            {
+                dealtdeck.deck.Add(card);
+                deck.deck.Remove(card);
+            }
+            return dealtdeck;
+        }
         
         
         
         static void Main(string[] args)
         {
             var deck = createDeck();
-            var dealt = new DealtCard();
-            shuffle(deck, 3);
+            var dealt = new DealtCardDeck();
+            shuffle(deck);
+            dealt.dealtCard.Add(dealOneCard(deck));
             
             
-            try
-            {
-                dealt.dealtCard.Add(dealOneCard(deck));
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                Console.WriteLine("There are no more cards to be dealt from that deck!");
-            }
-
-
-
-
-
-
-
-
-
+            
+            
+            
+            
+            
+            //shuffle(deck, 3);
+            //try
+            //{
+            //    dealt.dealtCard.Add(dealOneCard(deck));
+            //}
+            //catch (ArgumentOutOfRangeException)
+            //{
+            //    Console.WriteLine("There are no more cards to be dealt from that deck!");
+            //}
             //foreach (Card card in deck.deck)
             //{
             //    Console.WriteLine($"{card.face} of {card.suit}");
@@ -114,6 +124,7 @@ namespace AMSGeekCodingChallenge
 
             //ADD TESTS FOR EACH METHOD
             //ADD TEST FOR FINAL RUN THROUGH
+            //COMMENT AND DOCUMENT
 
         }
     }

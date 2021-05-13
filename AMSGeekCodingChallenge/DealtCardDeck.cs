@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AMSGeekCodingChallenge
 {
-    class DealtCard
+    class DealtCardDeck
     {
         public List<Card> dealtCard { get; set; } = new List<Card>();
     }
