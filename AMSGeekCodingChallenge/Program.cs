@@ -8,9 +8,9 @@ namespace AMSGeekCodingChallenge
 {
     class Program
     {
-        public static Deck createDeck()
+        public static Deck createDeck()                                     //Creating a card for each real world card in a standard 52 card deck.
         {
-            Deck cardDeck = new Deck() { };
+            Deck cardDeck = new Deck();
             foreach (Suit suit in Enum.GetValues(typeof(Suit)))
             {
                 foreach (Face face in Enum.GetValues(typeof(Face)))
@@ -23,19 +23,19 @@ namespace AMSGeekCodingChallenge
             }
             return cardDeck;
         }
-        public static void shuffle(Deck deck)
+        public static void shuffle(Deck deck)                           //Shuffle method to randomly permute the previously created deck of cards.
         {
             var randomNumber = new Random();
             for (int i = deck.deck.Count() - 1; i > 0; i--)
             {
-                int j = randomNumber.Next(0, i + 1);
+                int j = randomNumber.Next(0, i + 1);                    //Fisher-Yates shuffle algorithm where the current card is replaced with a random card within the deck of cards.
                 var temp = deck.deck[i];
                 deck.deck[i] = deck.deck[j];
                 deck.deck[j] = temp;
             }
             Console.WriteLine("Shuffled deck.");
         }
-        public static void shuffle(Deck deck, int timesToShuffle)
+        public static void shuffle(Deck deck, int timesToShuffle)       //Overloaded shuffle method to shuffle the deck a certain amount of times specified by the argument.
         {
             while (timesToShuffle > 0)
             {
@@ -43,12 +43,12 @@ namespace AMSGeekCodingChallenge
                 timesToShuffle--;
             }
         }
-        public static void dealOneCard(Deck deck)
+        public static void dealOneCard(Deck deck)                       //Method to deal one card (and remove that card from the deck) from a certain deck specified by the argument. 
         {
-            if (deck.deck.Count() > 0)
+            if (deck.deck.Count() > 0)                                  //Checks if there are any remaining cards in the deck before dealing a card.
             {
-                var cardToReturn = deck.deck[0];
-                Console.WriteLine($"Card dealt: \n{cardToReturn.face} of {cardToReturn.suit}\n");
+                var card = deck.deck[0];
+                Console.WriteLine($"Card dealt: \n{card.face} of {card.suit}\n");
                 deck.deck.RemoveAt(0);
             }
             else
@@ -58,7 +58,7 @@ namespace AMSGeekCodingChallenge
             
             
         }
-        public static void dealOneCard(Deck deck, int cardsToDeal)
+        public static void dealOneCard(Deck deck, int cardsToDeal)      //Overloaded dealOneCard method to deal a certain amount of cards from the deck specified by the argument.
         {
             if (cardsToDeal <= deck.deck.Count())
             {
