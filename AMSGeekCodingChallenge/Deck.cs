@@ -8,6 +8,6 @@ namespace AMSGeekCodingChallenge
 {
     class Deck
     {
-        public List<Card> deck { get; set; }
+        public List<Card> deck { get; set; } = new List<Card>();
     }
 }

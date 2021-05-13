@@ -8,21 +8,22 @@ namespace AMSGeekCodingChallenge
 {
     class Program
     {
-        public Deck createDeck()
+        public static Deck createDeck()
         {
-            Deck deck = new Deck();
+            Deck cardDeck = new Deck() { };
             foreach (Suit suit in Enum.GetValues(typeof(Suit)))
             {
-                var card = new Card();
-                card.suit = suit;
+                
                 foreach (Face face in Enum.GetValues(typeof(Face)))
                 {
+                    var card = new Card();
+                    card.suit = suit;
                     card.face = face;
-                    deck.deck.Add(card);
+                    cardDeck.deck.Add(card);
                 }
             }
             
-            return deck;
+            return cardDeck;
         }
         
         public static Deck shuffle(Deck deck)
@@ -37,7 +38,12 @@ namespace AMSGeekCodingChallenge
         static void Main(string[] args)
         {
             //test to see if the deck will print the enum value or the actual name
-
+            var deck = createDeck();
+            foreach (Card card in deck.deck)
+            {
+                Console.WriteLine($"{card.face} of {card.suit}");
+            }
+            Console.ReadLine();
 
 
 
