@@ -42,67 +42,65 @@ namespace AMSGeekCodingChallenge
                 timesToShuffle--;
             }
         }
-        public static Card dealOneCard(Deck deck)
+        public static void dealOneCard(Deck deck)
         {
             if (deck.deck.Count() > 0)
             {
                 var cardToReturn = deck.deck[0];
-                Console.WriteLine($"Card dealt: {cardToReturn.face} of {cardToReturn.suit}");
+                Console.WriteLine($"Card dealt: \n{cardToReturn.face} of {cardToReturn.suit}\n");
                 deck.deck.RemoveAt(0);
-                return cardToReturn;
             }
             else
             {
-                return null;
+                Console.WriteLine("There are no more cards to be dealt!");
             }
             
             
         }
-        public static Deck dealOneCard(Deck deck, int cardsToDeal)
+        public static void dealOneCard(Deck deck, int cardsToDeal)
         {
             if (cardsToDeal <= deck.deck.Count())
             {
-                var tempDeck = new Deck();
+                //var tempDeck = new Deck();
                 Console.WriteLine("Cards dealt: ");
                 while (cardsToDeal > 0)
                 {
-                    tempDeck.deck.Add(deck.deck[0]);
+                    //tempDeck.deck.Add(deck.deck[0]);
                     Console.WriteLine($"{deck.deck[0].face} of {deck.deck[0].suit}");
                     deck.deck.RemoveAt(0);
+                    if (cardsToDeal == 1) Console.WriteLine();
                     cardsToDeal--;
                 }
-                return tempDeck;
             }
             else
             {
-                return null;
+                Console.WriteLine("There are no more cards to be dealt!");
             }
             
 
         }
-        public static List<Card> deckToDealtDeck(Deck deck, List<Card> dealtDeck)
-        {
-            if (deck != null) 
-            {
-                foreach (var card in deck.deck)
-                {
-                    dealtDeck.Add(card);
-                    deck.deck.Remove(card);
-                } 
-            }
-            return dealtDeck;
-        }
+        //public static List<Card> deckToDealtDeck(Deck deck, List<Card> dealtDeck)
+        //{
+        //    if (deck != null) 
+        //    {
+        //        foreach (var card in deck.deck)
+        //        {
+        //            dealtDeck.Add(card);
+        //            deck.deck.Remove(card);
+        //        } 
+        //    }
+        //    return dealtDeck;
+        //}
         
         
         
         static void Main(string[] args)
         {
             var deck = createDeck();
-            var dealtDeck = new DealtCardDeck();
             shuffle(deck);
-            dealtDeck.dealtCard.Add(dealOneCard(deck));
+            dealOneCard(deck);
+            dealOneCard(deck, 10);
 
-            deckToDealtDeck(dealOneCard(deck, 10), dealtDeck.dealtCard);
             Console.ReadLine();
             
             
@@ -110,19 +108,6 @@ namespace AMSGeekCodingChallenge
             
             
             //shuffle(deck, 3);
-            //try
-            //{
-            //    dealt.dealtCard.Add(dealOneCard(deck));
-            //}
-            //catch (ArgumentOutOfRangeException)
-            //{
-            //    Console.WriteLine("There are no more cards to be dealt from that deck!");
-            //}
-            //foreach (Card card in deck.deck)
-            //{
-            //    Console.WriteLine($"{card.face} of {card.suit}");
-            //}
-            //Console.ReadLine();
 
             //TEST FOR UNORGANIZED LIST OF CARDS
 
